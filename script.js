@@ -28,7 +28,7 @@ if (scrollBtn) {
     
     // Smooth scroll to top
     const startPosition = window.pageYOffset;
-    const duration = 800;
+    const duration = Math.min(startPosition * 0.3, 500); // Dynamic duration, max 500ms
     let start = null;
     
     function animateScrollUp(timestamp) {
@@ -154,14 +154,11 @@ function initSmoothScrolling() {
       const targetSection = document.querySelector(targetId);
       
       if (targetSection) {
-        // Add scroll animation effect
-        document.body.style.transition = 'all 0.3s ease';
-        
-        // Smooth scroll with custom behavior
+        // Ultra-fast smooth scroll
         const startPosition = window.pageYOffset;
         const targetPosition = targetSection.offsetTop - 80;
         const distance = targetPosition - startPosition;
-        const duration = 1000;
+        const duration = Math.min(Math.abs(distance) * 0.2, 300); // Much faster, max 300ms
         let start = null;
         
         function animateScroll(timestamp) {
@@ -169,12 +166,10 @@ function initSmoothScrolling() {
           const progress = timestamp - start;
           const percentage = Math.min(progress / duration, 1);
           
-          // Easing function for smooth animation
-          const easeInOutCubic = percentage < 0.5 
-            ? 4 * percentage * percentage * percentage 
-            : (percentage - 1) * (2 * percentage - 2) * (2 * percentage - 2) + 1;
+          // Very fast easing - almost instant
+          const easeOutExpo = percentage === 1 ? 1 : 1 - Math.pow(2, -10 * percentage);
           
-          window.scrollTo(0, startPosition + distance * easeInOutCubic);
+          window.scrollTo(0, startPosition + distance * easeOutExpo);
           
           if (progress < duration) {
             requestAnimationFrame(animateScroll);
