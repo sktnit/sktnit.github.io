@@ -80,8 +80,90 @@ function initProjectCards() {
   });
 }
 
+// Smooth scrolling for navigation links
+function initSmoothScrolling() {
+  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+  
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      const targetSection = document.querySelector(targetId);
+      
+      if (targetSection) {
+        targetSection.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+}
+
+// Typing animation for home section
+function initTypingAnimation() {
+  const textElement = document.querySelector('.text-three');
+  if (textElement) {
+    const originalText = textElement.textContent;
+    textElement.textContent = '';
+    
+    let i = 0;
+    const typeWriter = () => {
+      if (i < originalText.length) {
+        textElement.textContent += originalText.charAt(i);
+        i++;
+        setTimeout(typeWriter, 100);
+      }
+    };
+    
+    setTimeout(typeWriter, 1000);
+  }
+}
+
+// Fade in animation for sections
+function initScrollAnimations() {
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        entry.target.classList.add('animate-in');
+      }
+    });
+  }, observerOptions);
+
+  // Observe all sections
+  const sections = document.querySelectorAll('section');
+  sections.forEach(section => {
+    section.style.opacity = '0';
+    section.style.transform = 'translateY(30px)';
+    section.style.transition = 'all 0.6s ease';
+    observer.observe(section);
+  });
+
+  // Observe skill boxes
+  const skillBoxes = document.querySelectorAll('.skills-details .box');
+  skillBoxes.forEach(box => {
+    observer.observe(box);
+  });
+
+  // Observe project cards
+  const projectCards = document.querySelectorAll('.project-card');
+  projectCards.forEach(card => {
+    observer.observe(card);
+  });
+}
+
 // Initialize animations when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
   animateTimeline();
   initProjectCards();
+  initSmoothScrolling();
+  initTypingAnimation();
+  initScrollAnimations();
 });
