@@ -1275,7 +1275,7 @@ footer .text span a:hover {
   .navbar p {
     display: flex;
     position: absolute;
-    left: 20px;
+    right: 60px;
     top: 50%;
     transform: translateY(-50%);
     gap: 8px;
@@ -1349,6 +1349,11 @@ footer .text span a:hover {
     margin-bottom: 10px;
     display: block;
   }
+
+  .timeline-item:nth-child(even) .timeline-date {
+  left: auto;
+  right: auto;
+}
 }
 
 @media (max-width: 500px) {
