@@ -162,12 +162,12 @@ nav {
   z-index: 998;
   transition: all 0.3s ease;
   font-family: 'Ubuntu', sans-serif;
-  background: rgba(10, 10, 10, 0.9);
+  background: rgba(10, 10, 10, 0.3);
   backdrop-filter: blur(10px);
 }
 
 nav.sticky {
-  background: rgba(10, 10, 10, 0.95);
+  background: rgba(10, 10, 10, 0.5);
   padding: 10px 0;
   box-shadow: 0 2px 20px rgba(0, 212, 255, 0.1);
 }
@@ -349,6 +349,7 @@ nav .menu-btn,
   cursor: pointer;
   transition: all 0.3s ease;
   display: none;
+  z-index: 999;
 }
 
 nav .menu-btn {
@@ -563,6 +564,30 @@ section .title span::after {
 .about .left img:hover {
   transform: scale(1.05);
   box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+}
+
+.about .left img {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  position: relative;
+}
+
+.about .left img::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 20px;
+}
+
+.about .left img[src=""],
+.about .left img:not([src]),
+.about .left img[alt="profile"][src*="placeholder"] {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
 }
 
 .about-details .right {
@@ -1247,8 +1272,18 @@ footer .text span a:hover {
     padding: 10px 20px;
   }
   
-  nav .navbar .media-icons {
-    display: none;
+  .navbar p {
+    display: flex;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    gap: 8px;
+  }
+  
+  .navbar p a img {
+    width: 30px;
+    height: 30px;
   }
   
   nav .menu-btn,
