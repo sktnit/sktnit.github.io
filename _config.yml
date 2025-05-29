@@ -1,0 +1,13 @@
+title: Shailesh's Portfolio
+name: Shailesh
+email: sktnit.cs18@gmail.com  
+description: >-
+  A passionate Sr. Software Engineer focused on full-stack web development.
+url: "https://sktnit.github.io"
+
+# Social Links
+github_username: sktnit
+linkedin_username: https://www.linkedin.com/in/sktnit
+
+# Theme
+theme: jekyll-theme-minimal
